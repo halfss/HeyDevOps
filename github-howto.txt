@@ -1,0 +1,18 @@
+1. Clone the repository from github
+git config --global user.name "mcsrainbow"
+git config --global user.email "guosuiyu@gmail.com"
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=3600'
+git clone https://github.com/mcsrainbow/HeyDevOps.git
+
+2. Add a SSH Key to github on page https://github.com/settings/profile - SSH Keys
+
+3. Commit in local repository
+cd HeyDevOps
+touch github-howto.txt
+git add github-howto.txt
+git commit -m "Add github-howto.txt"
+
+4. Push the commit to github
+git remote add origin https://github.com/mcsrainbow/HeyDevOps.git
+git push origin master
