@@ -1,4 +1,4 @@
 HeyDevOps
 =========
 
-HeyLinux.com + DevOps = HeyDevOps.
+HeyLinux.com + DevOps = HeyDevOps
