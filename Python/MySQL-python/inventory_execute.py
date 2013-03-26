@@ -19,7 +19,8 @@ for row in cursor.fetchall():
         print value
 
 # Insert
-sql = """INSERT IGNORE INTO hosts(hostname,public_dns,colo,environment,`group`,private_ip,public_ip,alias) VALUES(%s,%s,%s,%s,%s,%s,%s,%s);"""
+sql = """INSERT IGNORE INTO hosts(hostname,public_dns,colo,environment,`group`,private_ip,public_ip,alias) 
+             VALUES(%s,%s,%s,%s,%s,%s,%s,%s);"""
 param = [
         ("ip-10-197-51-58.us-west-1.compute.internal","ec2-184-169-210-122.us-west-1.compute.amazonaws.com",
             "sc2","dev","webserver","10.197.51.58","184.169.210.122","symbio1"),
