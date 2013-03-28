@@ -1,0 +1,4 @@
+sudo yum install vim
+
+cp .vimrc ~/
+cp -r .vim ~/
