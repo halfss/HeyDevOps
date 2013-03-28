@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-# FileName: server_ini.py
+# FileName: server_config.py
 # Date: Thu 28 Mar 2013 03:19:18 PM CST
 # Author: Dong Guo
 
