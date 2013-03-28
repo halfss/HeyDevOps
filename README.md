@@ -1,11 +1,10 @@
 HeyDevOps
 =========
-
-HeyLinux.com + DevOps = HeyDevOps <br />
+[HeyLinux.com](http://heylinux.com) + [DevOps](http://zh.wikipedia.org/zh-cn/DevOps) = [HeyDevOps](https://github.com/mcsrainbow/HeyDevOps) <br />
 <br />
 Subdirectory:<br />
 ------------------
 Bash, Python;<br />
-Chef, Puppet; Zabbix, Nagios; OpenStack, CloudStack;<br />
+Chef, Puppet; Zabbix, Nagios; CloudStack, OpenStack;<br />
 Hadoop<br />
 ...<br />
