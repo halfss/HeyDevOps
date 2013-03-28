@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-# FileName: inventory_execute_advanced-1.py
-# Date: Mon 25 Mar 2013 11:37:06 PM CST
+# FileName: inventory_execute.py
+# Date: Thu 28 Mar 2013 02:56:06 PM CST
 # Author: Dong Guo
 
 import MySQLdb
 
-#Type SQL
-class MySQL(object):
+class MyInventory(object):
     HOST = '192.168.92.128'
     DB = 'inventory'
     USER = 'inventory'
@@ -18,7 +17,11 @@ class MySQL(object):
     def __init__(self):
         self._conn = None
         if not self._create_connect():
-            print 'Failed to connect'
+            print 'Failed to connect.'
+
+    def __del__(self):
+        if not self._conn:
+            self._conn.close()
 
     # Create the connection
     def _create_connect(self):
@@ -35,9 +38,6 @@ class MySQL(object):
         else:
             return True
 
-    def _destory_connect(self):
-        self._conn.close()
-
     def _commit(self):
         self._conn.commit()
 
@@ -46,6 +46,7 @@ class MySQL(object):
         try:
             cursor = self._conn.cursor()
             cursor.execute(sql)
+            self._commit()
             for row in cursor.fetchall():
                 for value in row:
                     print value
@@ -60,6 +61,7 @@ class MySQL(object):
         try:
             cursor = self._conn.cursor()
             execute = cursor.executemany(sql,param)
+            self._commit()
         except MySQLdb.Error, e:
             print '{0}'.format(e)
             return False
@@ -67,7 +69,7 @@ class MySQL(object):
             return True
 
 if __name__=='__main__':
-    db = MySQL()
+    db = MyInventory()
 
     # Select
     db.select("SELECT hostname FROM hosts;")
@@ -102,6 +104,3 @@ if __name__=='__main__':
             ("centos")
             ]
     db.execute(sql,param)
-
-    db._commit()
-    db._destory_connect()

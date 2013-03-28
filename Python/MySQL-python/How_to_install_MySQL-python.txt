@@ -1,1 +1,0 @@
-sudo yum install mysql-connector-python MySQL-python
