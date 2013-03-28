@@ -150,13 +150,15 @@ function Mytitle()
     call append(5, "# Author: Dong Guo")
 endf
 
-function Myclass() 
-    call append(line("."), "/// @class:\t")
-    call append(line(".")+1, "/// @brief:\t")
+function Mymain() 
+    call append(line("."),   "def main():")
+    call append(line(".")+1, "")
+    call append(line(".")+2, "if __name__=='__main__':")
+    call append(line(".")+3, "    main()")
 endf
 
 "映射到快捷键
 map <F2> <Esc>:call Mytitle()<CR><Esc>
-map <F3> <Esc>:call Myclass()<CR><Esc>
+map <F3> <Esc>:call Mymain()<CR><Esc>
 
 
