@@ -5,7 +5,7 @@
 # Date: Thu 28 Mar 2013 04:06:43 PM CST
 # Author: Dong Guo
 
-# Execute: fab -f host_type.py -H dong.guo@localhost:22 host_type
+# Usage: fab -f host_type.py -H dong.guo@localhost:22 host_type
 from fabric.api import run
 
 def host_type():

@@ -5,7 +5,7 @@
 # Date: Thu 28 Mar 2013 04:24:35 PM CST
 # Author: Dong Guo
 
-# Execute: fab -f hello_servers.py set_hosts mytask
+# Usage: fab -f hello_servers.py set_hosts mytask
 from fabric.api import env, run
 
 def set_hosts():

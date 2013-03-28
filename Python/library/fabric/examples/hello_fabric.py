@@ -5,6 +5,6 @@
 # Date: Thu 28 Mar 2013 04:06:13 PM CST
 # Author: Dong Guo
 
-# Execute: fab -f hello_fabric.py hello:name=Fabric
+# Usage: fab -f hello_fabric.py hello:name=Fabric
 def hello(name="world"):
     print("Hello %s!" % name)
