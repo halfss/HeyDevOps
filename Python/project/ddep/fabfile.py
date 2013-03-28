@@ -5,35 +5,47 @@
 # Date: Thu 28 Mar 2013 10:21:18 PM CST
 # Author: Dong Guo
 
-import textwrap
-import argparse
-
-from utils.inventory import Inventory
-
+from utils import torndb
+from service import *
 
 def parse_opts():
+    """Help message (-h, --help) for fabfile.py."""
+
+    # Import the libraries
+    import textwrap
+    import argparse
+
+    # The user-defined description
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description=textwrap.dedent(
         '''
-        deployment engine should run as:
-        "ddep -c config [-g group] [-H host [host1,host2,host3]] [-r]"
+        example:
+          ddep -g webserver -H symbio1,symbio2 -r demo_upload
         '''
         ))
-    parser.add_argument('-c', metavar='config', type=str, required=True,
-            help='Read the configuration from a specific file, by default, it\'s from database.')
+    
+    # The arguments
     parser.add_argument('-g', metavar='group', type=str,
             help='Deploy to all hosts in the colo-environment group.')
-    parser.add_argument('-H', metavar='host [host1,host2,host3...]', type=str,
+    parser.add_argument('-H', metavar='hosts', type=str,
             help='Verify hosts in specified colo-environment.')
-    parser.add_argument('-r', action='store_true', 
+    parser.add_argument('-r', metavar='task', type=str, 
             help='Execute deployment, by default, only print debug output of action to be taken.')
+
     args = parser.parse_args()
     print args
-    return {'config':args.c, 'group':args.g, 'host':args.H}
+    
+    # Return the values of arguments
+    return {'group':args.g, 'host':args.H}
 
 def main():
     opts = parse_opts()
+
+    # Database query test
+    db = Connection("192.168.92.128","inventory","inventory","inventory")
+    for host in db.query("SELECT * FROM hosts"):
+        print host.private_ip
 
 if __name__=='__main__':
     main()

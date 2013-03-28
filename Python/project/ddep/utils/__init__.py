@@ -5,4 +5,3 @@
 # Date: Thu 28 Mar 2013 10:48:38 PM CST
 # Author: Dong Guo
 
-from inventory import *
