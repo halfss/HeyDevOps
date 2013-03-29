@@ -13,13 +13,16 @@ config = ConfigParser.ConfigParser()
 
 settings = global_settings
 
-def dbconf(key):
+def dbconf():
     try:
         file = os.path.join(settings.CONFIG_HOME, 'db.ini')
         config.read(file)
-        value = config.get("default", key)
+        host = config.get("default", "host")
+        database = config.get("default", "database")
+        user = config.get("default", "user")
+        password = config.get("default", "password")
     except ConfigParser.Error, e:
         print '{0}'.format(e)
         return False
     else:
-        return value
+        return {'host':host,'database':database,'user':user,'password':password}

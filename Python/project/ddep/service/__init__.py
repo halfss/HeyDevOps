@@ -6,4 +6,3 @@
 # Author: Dong Guo
 
 from config import dbconf
-from demo import demo_upload
