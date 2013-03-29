@@ -2,7 +2,7 @@
 #-*- coding:utf-8 -*-
 
 # FileName: __init__.py
-# Date: Thu 28 Mar 2013 10:48:38 PM CST
+# Date: Fri 29 Mar 2013 10:37:27 AM CST
 # Author: Dong Guo
 
-from torndb import *
+import global_settings

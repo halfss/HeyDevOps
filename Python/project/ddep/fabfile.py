@@ -5,7 +5,6 @@
 # Date: Thu 28 Mar 2013 10:21:18 PM CST
 # Author: Dong Guo
 
-from utils import torndb
 from service import *
 
 def parse_opts():
@@ -41,11 +40,6 @@ def parse_opts():
 
 def main():
     opts = parse_opts()
-
-    # Database query test
-    db = Connection("192.168.92.128","inventory","inventory","inventory")
-    for host in db.query("SELECT * FROM hosts"):
-        print host.private_ip
 
 if __name__=='__main__':
     main()
