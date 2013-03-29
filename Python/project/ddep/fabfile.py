@@ -44,17 +44,16 @@ def parse_opts():
 
 def run_task(opts):
     task = opts["task"]
-    print("task is %s" % task)
 
     if task == None:
-        print "no task given"
+        print "NO task given"
     else:
         group = opts["group"]
         if group == None:
-            print "no group given"
+            print "NO group given"
             host = opts["host"]
             if host == None:
-                print "no host given"
+                print "NO host given"
                 return None
             else:
                 print("fab -f service/%s.py -H %s %s" % (task,host,task))
