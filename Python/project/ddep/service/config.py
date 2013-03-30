@@ -7,7 +7,7 @@
 
 import os
 import ConfigParser
-from conf import global_settings
+import global_settings
 
 config = ConfigParser.ConfigParser()
 

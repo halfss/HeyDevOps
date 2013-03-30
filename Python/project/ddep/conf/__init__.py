@@ -4,5 +4,3 @@
 # FileName: __init__.py
 # Date: Fri 29 Mar 2013 10:37:27 AM CST
 # Author: Dong Guo
-
-import global_settings
