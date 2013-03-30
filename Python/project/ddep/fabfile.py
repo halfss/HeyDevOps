@@ -90,7 +90,7 @@ def run_task(opts):
             os.system("fab -f service/%s.py -H %s -P -z %s %s" % (project,host,number,task))
 
 def main():
-    # check if user execute the script without any arguments
+    # check if user executes the script without any arguments
     argv_len = len(sys.argv)
     if argv_len < 2:
         os.system("./ddep -h")
