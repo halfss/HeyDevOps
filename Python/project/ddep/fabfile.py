@@ -8,7 +8,6 @@
 import sys
 import os
 
-from fabric.api import env, local
 from utils.torndb import Connection
 from service.config import dbconf
 
