@@ -6,3 +6,4 @@
 # Author: Dong Guo
 
 PROJECT_HOME = "/home/dong.guo/github/HeyDevOps/Python/project/ddep"
+CONFIG_HOME = "/home/dong.guo/github/HeyDevOps/Python/project/ddep/conf"

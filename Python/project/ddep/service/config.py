@@ -7,7 +7,7 @@
 
 import os
 import ConfigParser
-import global_settings
+from service import global_settings
 
 config = ConfigParser.ConfigParser()
 
