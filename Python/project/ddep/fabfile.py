@@ -5,13 +5,16 @@
 # Date: Thu 28 Mar 2013 10:21:18 PM CST
 # Author: Dong Guo
 
+import sys
+import os
+
 from fabric.api import env, local
 from utils.torndb import Connection
 from service.config import dbconf
 
 def parse_opts():
     """Help messages (-h, --help) for fabfile.py."""
-
+    
     # import the libraries
     import textwrap
     import argparse
@@ -22,8 +25,9 @@ def parse_opts():
         description=textwrap.dedent(
         '''
         example:
-          ddep -H symbio1,symbio2,symbio3 -r demo_upload
-          ddep -g webserver -r demo_upload
+          ddep -H symbio1,symbio2,symbio3 -r demo -t upload
+          ddep -g webserver -r demo -t upload
+          ddep -g webserver -r demo -t upload -f 2
         '''
         ))
     
@@ -31,47 +35,68 @@ def parse_opts():
 
     # the arguments
     exclusion.add_argument('-g', metavar='group', type=str,
-            help='Deploy to all hosts in the colo-environment group.')
+            help='Deploy to all hosts in the group.')
     exclusion.add_argument('-H', metavar='hosts', type=str,
-            help='Verify hosts in specified colo-environment.')
-    parser.add_argument('-r', metavar='task', type=str, 
-            help='Execute deployment, by default, only print debug output of action to be taken.')
+            help='Deploy to the hosts.')
+    parser.add_argument('-r', metavar='project', type=str, required=True,
+            help='Execute the project.')
+    parser.add_argument('-t', metavar='task', type=str, required=True,
+            help='The task name of the project.')
+    parser.add_argument('-f', metavar='number', type=int, 
+            help='The number of concurrent processes to use in parallel mode.')
 
     args = parser.parse_args()
     
     # return the values of arguments
-    return {'group':args.g, 'host':args.H, 'task':args.r}
+    return {'group':args.g, 'host':args.H, 'project':args.r, 'task':args.t, 'number':args.f}
 
 def run_task(opts):
+    project = opts["project"]
     task = opts["task"]
 
-    if task == None:
-        print "NO task given"
-    else:
-        group = opts["group"]
-        if group == None:
-            print "NO group given"
-            host = opts["host"]
-            if host == None:
-                print "NO host given"
-                return None
-            else:
-                print("fab -f service/%s.py -H %s %s" % (task,host,task))
-                local("fab -f service/%s.py -H %s %s" % (task,host,task))
+    group = opts["group"]
+    if not group:
+        print "A group or host(s) is required."
+        host = opts["host"]
+        return None
+        if not host:
+            print "A group or host(s) is required."
+            return None
         else:
-            dbopts = dbconf()
-            host = dbopts["host"]
-            database = dbopts["database"]
-            user = dbopts["user"]
-            password = dbopts["password"]
-            db = Connection(host,database,user,password)
-            sql = ('SELECT * FROM hosts WHERE `group`="%s"' % group)
-            for item in db.query(sql):
-                hosts = item.public_dns
-                print("fab -f service/%s.py -H %s %s" % (task,hosts,task))
-                local("fab -f service/%s.py -H %s %s" % (task,hosts,task))
+            number = opts["number"]
+            if not number:
+                print("Executing \"fab -f service/%s.py -H %s %s \"" % (project,host,task))
+                os.system("fab -f service/%s.py -H %s %s" % (project,host,task))
+            else:
+                print("Executing \"fab -f service/%s.py -H %s -P -z %s %s \"" % (project,host,number,task))
+                os.system("fab -f service/%s.py -H %s -P -z %s %s" % (project,host,number,task))
+    else:
+        dbopts = dbconf()
+        host = dbopts["host"]
+        database = dbopts["database"]
+        user = dbopts["user"]
+        password = dbopts["password"]
+        db = Connection(host,database,user,password)
+        sql = ('SELECT * FROM hosts WHERE `group`="%s"' % group)
+        str = []
+        for item in db.query(sql):
+            str.append(item.public_ip)
+        host = ','.join(str)
+        number = opts["number"]
+        if not number:
+            print("Executing \"fab -f service/%s.py -H %s %s \"" % (project,host,task))
+            os.system("fab -f service/%s.py -H %s %s " % (project,host,task))
+        else:
+            print("Executing \"fab -f service/%s.py -H %s -P -z %s %s \"" % (project,host,number,task))
+            os.system("fab -f service/%s.py -H %s -P -z %s %s" % (project,host,number,task))
 
 def main():
+    # check if user execute the script without any arguments
+    argv_len = len(sys.argv)
+    if argv_len < 2:
+        os.system("./ddep -h")
+        return None 
+
     opts = parse_opts()
     run_task(opts)
 
