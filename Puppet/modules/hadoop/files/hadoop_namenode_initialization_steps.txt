@@ -1,0 +1,27 @@
+"File Managed by Puppet"
+
+"--------------------------------------------"
+"The initialization steps for Hadoop Namenode"
+"--------------------------------------------"
+
+"Step1. Format the HDFS on Namenode"
+sudo -u hdfs hadoop namenode -format
+
+"Step2. Start the namenode service"
+sudo /etc/init.d/hadoop-0.20-namenode start
+
+"Step3. Start all datanode services"
+sudo /etc/init.d/hadoop-0.20-datanode start
+
+"Step4. Create the directories for Map-Reduce"
+sudo -u hdfs hadoop fs -mkdir /mapred/system
+sudo -u hdfs hadoop fs -chown mapred:hadoop /mapred/system
+
+"Step5. Start the secondarynamenode service"
+sudo /etc/init.d/hadoop-0.20-secondarynamenode start
+
+"Step6. Start the jobtracker service"
+sudo /etc/init.d/hadoop-0.20-jobtracker start
+
+"Step7. Start all tasktracker services"
+sudo /etc/init.d/hadoop-0.20-tasktracker start

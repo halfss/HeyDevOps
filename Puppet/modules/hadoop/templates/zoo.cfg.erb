@@ -1,0 +1,18 @@
+# File Managed by Puppet
+
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial 
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between 
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+dataDir=/data/zookeeper
+# the port at which the clients will connect
+clientPort=2181
+maxClientCnxns=0
+server.1=hadoop-master:2888:3888
+server.2=hadoop-secondary:2888:3888
+server.3=hadoop-node-1:2888:3888
