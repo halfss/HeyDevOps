@@ -45,3 +45,4 @@ node 'ip-10-197-62-239.us-west-1.compute.internal' {
     include role_datanode
     include role_zookeeperserver
 }
+
