@@ -42,7 +42,6 @@ class hadoop::basepackages {
     # Create required directories
     $directory_list = [
                       "/data",
-                      "/data/storage",
                       "/data/hdfs",
                       ]
     
@@ -51,7 +50,13 @@ class hadoop::basepackages {
         ensure => directory,
         require => Package["hadoop-0.20"], # Require Package
     }
- 
+
+    file { "/data/storage":
+        mode   => "1777", owner  => "hdfs", group  => "hadoop",
+        ensure => directory,
+        require => Package["hadoop-0.20"], # Require Package
+    }
+   
     # Update /etc/hadoop/conf/hadoop-env.sh
     file { "hadoop-env.sh":
         path    => "/etc/hadoop/conf/hadoop-env.sh",
