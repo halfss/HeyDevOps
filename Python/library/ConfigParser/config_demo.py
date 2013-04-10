@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-# FileName: server_config.py
-# Date: Thu 28 Mar 2013 03:19:18 PM CST
+# FileName: config_demo.py
+# Date: Thu 11 Apr 2013 02:42:05 AM CST
 # Author: Dong Guo
 
 import ConfigParser

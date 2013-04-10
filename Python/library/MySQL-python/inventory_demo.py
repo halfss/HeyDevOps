@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-# FileName: inventory_execute.py
+# FileName: inventory_demo.py
 # Date: Thu 28 Mar 2013 02:56:06 PM CST
 # Author: Dong Guo
 

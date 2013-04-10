@@ -9,25 +9,38 @@ import textwrap
 import argparse
 
 def parse_opts():
+    """Help messages (-h, --help) for fabfile.py."""
+    
+    # the user-defined description
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description=textwrap.dedent(
         '''
-        deployment engine should run as:
-        "ddep -c config [-g group] [-H host [host1,host2,host3]] [-r]"
+        example:
+          ddep -H symbio1,symbio2,symbio3 -r demo -t upload
+          ddep -g webserver -r demo -t upload
+          ddep -g webserver -r demo -t upload -f 2
         '''
         ))
-    parser.add_argument('-c', metavar='config', type=str, required=True,
-            help='Read the configuration from a specific file, by default, it\'s from database.')
-    parser.add_argument('-g', metavar='group', type=str,
-            help='Deploy to all hosts in the colo-environment group.')
-    parser.add_argument('-H', metavar='host [host1,host2,host3...]', type=str,
-            help='Verify hosts in specified colo-environment.')
-    parser.add_argument('-r', action='store_true', 
-            help='Execute deployment, by default, only print debug output of action to be taken.')
+    
+    exclusion = parser.add_mutually_exclusive_group()
+
+    # the arguments
+    exclusion.add_argument('-g', metavar='group', type=str,
+            help='Deploy to all hosts in the group.')
+    exclusion.add_argument('-H', metavar='hosts', type=str,
+            help='Deploy to the hosts.')
+    parser.add_argument('-r', metavar='project', type=str, required=True,
+            help='Execute the project.')
+    parser.add_argument('-t', metavar='task', type=str, required=True,
+            help='The task name of the project.')
+    parser.add_argument('-f', metavar='number', type=int, 
+            help='The number of concurrent processes to use in parallel mode.')
+
     args = parser.parse_args()
-    print args
-    return {'config':args.c, 'group':args.g, 'host':args.H}
+    
+    # return the values of arguments
+    return {'group':args.g, 'host':args.H, 'project':args.r, 'task':args.t, 'number':args
 
 def main():
     opts = parse_opts()
