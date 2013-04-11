@@ -45,10 +45,4 @@ class hadoop::gangliaserver {
         ensure => "running",
         require => Package["httpd"], # Require Package
     }
-
-    file { "/var/lib/ganglia/rrds":
-        mode   => "0775", owner  => "nobody", group  => "root",
-        ensure => directory,
-        require => Package["ganglia-web"], # Require Package
-    }
 }
