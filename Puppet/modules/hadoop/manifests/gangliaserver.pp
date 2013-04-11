@@ -33,7 +33,7 @@ class hadoop::gangliaserver {
         notify  => Service["httpd"], # Notify the service to restart when changes
     }
 
-    # Ensure services start on boot
+    # Ensure services start on boot and running
     service { "gmetad":
         enable => "true",
         ensure => "running",
