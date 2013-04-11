@@ -8,6 +8,7 @@ class role_secondarynamenode {
     include hadoop::secondarynamenode
     include hadoop::jobtracker
     include hadoop::hive
+    include hadoop::gangliaserver
 }
 
 class role_datanode {
@@ -15,6 +16,7 @@ class role_datanode {
     include hadoop::tasktracker
     include hadoop::zookeeper
     include hadoop::hbaseregionserver
+    include hadoop::ganglia
 }
 
 class role_zookeeperserver {
@@ -45,4 +47,3 @@ node 'ip-10-197-62-239.us-west-1.compute.internal' {
     include role_datanode
     include role_zookeeperserver
 }
-

@@ -1,3 +1,10 @@
+sudo setenforce 0
+sudo vim /etc/selinux/config 
+---
+SELINUX=disabled
+
+sudo /etc/init.d/iptables stop
+
 sudo vim /etc/yum.repos.d/puppet.repo
 ---
 [puppetlabs]
