@@ -59,4 +59,17 @@ class hadoop::hive {
         content => template("hadoop/hive-site.xml.erb"),
         require => Package["hadoop-hive"], # Require Package
     }
+
+    # Ensure services start on boot and running
+    service { "hadoop-hive-metastore":
+        enable => "true",
+        ensure => "running",
+        require => Package["hadoop-hive-metastore"], # Require Package
+    }
+
+    service { "hadoop-hive-server":
+        enable => "true",
+        ensure => "running",
+        require => Package["hadoop-hive-server"], # Require Package
+    }
 }

@@ -17,4 +17,11 @@ class hadoop::namenode {
         mode   => "0644", owner => "root", group => "root",
         source => "puppet:///modules/hadoop/hadoop_namenode_initialization_steps.txt",
     }
+
+    # Ensure services start on boot and running
+    service { "hadoop-0.20-namenode":
+        enable => "true",
+        ensure => "running",
+        require => Package["hadoop-0.20-namenode"], # Require Package
+    }
 }

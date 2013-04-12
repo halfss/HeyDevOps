@@ -30,4 +30,11 @@ class hadoop::zookeeperserver {
         content => template("hadoop/myid.erb"),
         require => File["/data/zookeeper"], # Require File
     }
+
+    # Ensure services start on boot and running
+    service { "hadoop-zookeeper-server":
+        enable => "true",
+        ensure => "running",
+        require => Package["hadoop-zookeeper-server"], # Require Package
+    }
 }

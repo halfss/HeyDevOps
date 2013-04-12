@@ -18,4 +18,17 @@ class hadoop::hbasemaster {
         mode   => "0644", owner => "root", group => "root",
         source => "puppet:///modules/hadoop/hbasemaster_initialization_steps.txt",
     }
+
+    # Ensure services start on boot and running
+    service { "hadoop-hbase-master":
+        enable => "true",
+        ensure => "running",
+        require => Package["hadoop-hbase-master"], # Require Package
+    }
+
+    service { "hadoop-hbase-thrift":
+        enable => "true",
+        ensure => "running",
+        require => Package["hadoop-hbase-thrift"], # Require Package
+    }
 }

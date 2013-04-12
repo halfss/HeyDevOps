@@ -10,4 +10,11 @@ class hadoop::hbaseregionserver {
                     "hadoop-hbase-regionserver",
                     ]
     package { $package_list: ensure => "installed" }
+
+    # Ensure services start on boot and running
+    service { "hadoop-hbase-regionserver":
+        enable => "true",
+        ensure => "running",
+        require => Package["hadoop-hbase-regionserver"], # Require Package
+    }
 }

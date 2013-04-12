@@ -10,4 +10,11 @@ class hadoop::datanode {
                     "hadoop-0.20-datanode",
                     ]
     package { $package_list: ensure => "installed" }
+
+    # Ensure services start on boot and running
+    service { "hadoop-0.20-datanode":
+        enable => "true",
+        ensure => "running",
+        require => Package["hadoop-0.20-datanode"], # Require Package
+    }
 }
