@@ -55,9 +55,7 @@ def run_task(opts):
 
     group = opts["group"]
     if not group:
-        print "A group or host(s) is required."
         host = opts["host"]
-        return None
         if not host:
             print "A group or host(s) is required."
             return None
