@@ -5,6 +5,9 @@ class hadoop::ganglia {
     # Require the basepackages from basepackages.pp
     require hadoop::basepackages
 
+    # Require the hbasecommon from hbasecommon.pp
+    require hadoop::hbasecommon
+
     # Install required RPM packages
     $package_list = [ 
                     "ganglia",
@@ -21,6 +24,24 @@ class hadoop::ganglia {
         require => Package["ganglia-gmond"], # Require Package
         notify  => Service["gmond"], # Notify the service to restart when changes
     }
+
+   # Update /etc/hadoop/conf/hadoop-metrics.properties 
+   file { "hadoop-metrics.properties":
+        path    => "/etc/hadoop/conf/hadoop-metrics.properties",
+        mode    => "0644", owner => "hdfs", group => "hadoop",
+        ensure  => present,
+        content => template("hadoop/hadoop-metrics.properties.erb"),
+        require => Package["hadoop-0.20"], # require Package
+   }
+
+   # Update /etc/hbase/conf/hadoop-metrics.properties 
+   file { "hbase_hadoop-metrics.properties":
+        path    => "/etc/hbase/conf/hadoop-metrics.properties",
+        mode    => "0644", owner => "hbase", group => "hbase",
+        ensure  => present,
+        content => template("hadoop/hbase_hadoop-metrics.properties.erb"),
+        require => Package["hadoop-hbase"], # require Package
+   }
 
     # Ensure service starts on boot and running
     service { "gmond":
