@@ -7,13 +7,16 @@
 
 import os
 import ConfigParser
+
+# get the settings from service/global_settings.py
 from service import global_settings
 
 config = ConfigParser.ConfigParser()
-
 settings = global_settings
 
 def dbconf():
+    """Get the database values from conf/db.ini."""
+
     try:
         file = os.path.join(settings.CONFIG_HOME, 'db.ini')
         config.read(file)
@@ -28,6 +31,8 @@ def dbconf():
         return {'host':host,'database':database,'user':user,'password':password}
 
 def userconf():
+    """Get the username and keyfile path from conf.auth.ini."""
+
     try:
         file = os.path.join(settings.CONFIG_HOME, 'auth.ini')
         config.read(file)

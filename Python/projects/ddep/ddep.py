@@ -8,11 +8,14 @@
 import sys
 import os
 
+# torndb is a lightweight wrapper around MySQLdb
 from utils.torndb import Connection
+
+# configuration files from conf/db.ini and conf/auth.ini
 from service.config import dbconf, userconf
 
 def parse_opts():
-    """Help messages (-h, --help) for fabfile.py."""
+    """Help messages (-h, --help) for ddep.py."""
     
     # import the libraries
     import textwrap
@@ -32,7 +35,7 @@ def parse_opts():
     
     exclusion = parser.add_mutually_exclusive_group()
 
-    # the arguments
+    # set the arguments
     exclusion.add_argument('-g', metavar='group', type=str,
             help='Deploy to all hosts in the group.')
     exclusion.add_argument('-H', metavar='hosts', type=str,
@@ -50,29 +53,47 @@ def parse_opts():
     return {'group':args.g, 'host':args.H, 'project':args.r, 'task':args.t, 'number':args.f}
 
 def fab_execute(**kwargs):
+    """Execute the task from service/{taskname}.py with class FabricSupport."""
+
+    # get values from the given tuple
     project = kwargs['project']
     host = kwargs['host']
     task = kwargs['task']
+
+    # give the concurrent number a default value
     number = kwargs.get('number', "1")
     
+    # change the multiple hosts into a list
     hosts = host.split(',')
 
+    # get the username and keyfile path from conf/auth.ini
     useropts = userconf()
 
+    # import class FabricSupport from the given task
     get_import = "from service.{0} import FabricSupport".format(project)
     exec get_import
 
+    # execute the given task
     myfab = FabricSupport()
     return myfab.execute(task,hosts,number,useropts["user"],useropts["keyfile"])
 
 def run_task_from_db(opts):
+    """Get the hosts from database, and run fab_execute."""
+
+    # get the database from conf/db.ini
     dbopts = dbconf()
+
+    # connect the database
     db = Connection(dbopts["host"], dbopts["database"], dbopts["user"], dbopts["password"])
+
+    # get the hosts from database
     sql = """SELECT * FROM hosts WHERE `group` like '{0}'""".format('%%' + opts["group"] + '%%')
     result = []
     for item in db.query(sql):
         result.append(item.public_ip)
     host = ','.join(result)
+
+    # run fab_execute
     if not host:
         print "No host(s) found in group \"{0}\"".format(opts["group"])
         return
@@ -81,6 +102,9 @@ def run_task_from_db(opts):
     return fab_execute(project=opts["project"],host=host,number=opts["number"],task=opts["task"])
 
 def run_task_from_value(opts):
+    """Get the hosts from given arguments, and run fab_execute. """
+
+    # run fab_execute
     if not opts["host"]:
         print "A group or host(s) is required."
         return
@@ -89,6 +113,8 @@ def run_task_from_value(opts):
     return fab_execute(project=opts["project"],host=opts["host"],number=opts["number"],task=opts["task"])
 
 def run_task(opts):
+    """Determine which run_task_from should be triggered."""
+
     if not opts["group"]:
         return run_task_from_value(opts)
     return run_task_from_db(opts)
@@ -100,6 +126,7 @@ def main():
         os.system("./ddep.py -h")
         return None 
 
+    # get the arguments and trigger the run_task
     opts = parse_opts()
     run_task(opts)
 

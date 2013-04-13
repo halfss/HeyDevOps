@@ -7,7 +7,7 @@
 
 from fabric.api import *
 from fabric.colors import *
-import global_settings
+from service import global_settings
 
 settings = global_settings
 
