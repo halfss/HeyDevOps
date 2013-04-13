@@ -15,6 +15,17 @@ class FabricSupport(object):
     def __init__(self):
         pass
 
+    def execute(self,task,hosts,number,user,keyfile):
+        env.parallel = True
+        env.pool_size = number
+        env.user = user
+        env.key_filename = keyfile
+
+        get_task = "task = self.{0}".format(task)
+        exec get_task
+
+        execute(task,hosts=hosts)
+
     def upload(self):
         print(green("Transfer the file demo_upload.txt"))
         with lcd (settings.PROJECT_HOME):
@@ -32,14 +43,3 @@ class FabricSupport(object):
     def rollback(self):
         print(green("Rollback action"))
         sudo('mv -f /home/adsymp/jetty/webapps/demo_upload.txt.prev /home/adsymp/jetty/webapps/demo_upload.txt')
-
-    def execute(self,task,hosts,number,user,keyfile):
-        env.parallel = True
-        env.pool_size = number
-        env.user = user
-        env.key_filename = keyfile
-
-        get_task = "task = self.{0}".format(task)
-        exec get_task
-
-        execute(task,hosts=hosts)
