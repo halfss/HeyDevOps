@@ -1,0 +1,4 @@
+sudo rpm -ivh http://fr2.rpmfind.net/linux/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+sudo yum install gcc libxml2 libxml2-devel libxslt libxslt-devel libyaml PyYAML
+sudo yum install python-setuptools python-pip python-devel
