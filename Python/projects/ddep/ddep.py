@@ -24,9 +24,9 @@ def parse_opts():
         description=textwrap.dedent(
         '''
         example:
-          ddep -H symbio1,symbio2,symbio3 -r demo -t upload
-          ddep -g webserver -r demo -t upload
-          ddep -g webserver -r demo -t upload -f 2
+          ./ddep.py -H symbio1,symbio2,symbio3 -r demo -t upload
+          ./ddep.py -g webserver -r demo -t upload
+          ./ddep.py -g webserver -r demo -t upload -f 2
         '''
         ))
     
@@ -97,7 +97,7 @@ def main():
     # check if user executes the script without any arguments
     argv_len = len(sys.argv)
     if argv_len < 2:
-        os.system("./ddep -h")
+        os.system("./ddep.py -h")
         return None 
 
     opts = parse_opts()
