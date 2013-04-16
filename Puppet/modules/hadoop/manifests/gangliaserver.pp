@@ -5,9 +5,11 @@ class hadoop::gangliaserver {
     # Require the basepackages from basepackages.pp
     require hadoop::ganglia
 
+    # Require the common:httpd from common/httpd.pp
+    require common::httpd
+
     # Install required RPM packages
     $package_list = [ 
-                    "httpd",
                     "ganglia-gmetad",
                     "ganglia-web",
                     ]
@@ -28,9 +30,9 @@ class hadoop::gangliaserver {
         path    => "/etc/httpd/conf.d/ganglia.conf",
         mode    => "0644", owner => "ganglia", group => "ganglia",
         ensure  => present,
-        content => template("hadoop/httpd_ganglia.conf.erb"),
+        content => template("hadoop/httpd-ganglia.conf.erb"),
         require => Package["ganglia-web"], # Require Package
-        notify  => Service["httpd"], # Notify the service to restart when changes
+        #notify  => Service["httpd"], # Notify the service to restart when changes
     }
 
     # Ensure services start on boot and running
@@ -38,11 +40,5 @@ class hadoop::gangliaserver {
         enable => "true",
         ensure => "running",
         require => Package["ganglia-gmetad"], # Require Package
-    }
-
-    service { "httpd":
-        enable => "true",
-        ensure => "running",
-        require => Package["httpd"], # Require Package
     }
 }

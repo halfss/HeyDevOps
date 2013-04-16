@@ -1,4 +1,7 @@
 class hadoop::basepackages {
+    # Require the EPEL repo from common/epel.pp
+    require common::epel
+
     # Require the params from params.pp
     require hadoop::params
 
@@ -8,7 +11,7 @@ class hadoop::basepackages {
                     ]
     package { $package_list: 
         ensure => "installed",
-        require => Exec["jdk-6u41-linux-amd64.rpm"], # Require Exec
+        require => Exec["jdk-6u41-linux-amd64.rpm","epel-release-6-8.noarch.rpm"], # Require Exec
     }
 
     # Install Sun JDK

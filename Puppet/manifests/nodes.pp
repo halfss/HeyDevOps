@@ -9,6 +9,7 @@ class role_secondarynamenode {
     include hadoop::jobtracker
     include hadoop::hive
     include hadoop::gangliaserver
+    include graphite::server
 }
 
 class role_datanode {
