@@ -45,11 +45,16 @@ class hadoop::basepackages {
     # Create required directories
     $directory_list = [
                       "/data",
-                      "/data/hdfs",
                       ]
     
     file { $directory_list:
         mode   => "0775", owner  => "hdfs", group  => "hadoop",
+        ensure => directory,
+        require => Package["hadoop-0.20"], # Require Package
+    }
+
+    file { "/data/hdfs":
+        mode   => "0700", owner  => "hdfs", group  => "hadoop",
         ensure => directory,
         require => Package["hadoop-0.20"], # Require Package
     }

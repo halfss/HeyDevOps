@@ -2,12 +2,13 @@
 class role_namenode {
     include hadoop::namenode
     include hadoop::hbasemaster
+    include hadoop::hueserver
 }
 
 class role_secondarynamenode {
     include hadoop::secondarynamenode
     include hadoop::jobtracker
-    include hadoop::hive
+    include hadoop::hiveserver
     include hadoop::gangliaserver
     include graphite::server
 }
@@ -17,7 +18,9 @@ class role_datanode {
     include hadoop::tasktracker
     include hadoop::zookeeper
     include hadoop::hbaseregionserver
-    include hadoop::ganglia
+    include hadoop::hive
+    include hadoop::ganglia 
+    include hadoop::hue
 }
 
 class role_zookeeperserver {

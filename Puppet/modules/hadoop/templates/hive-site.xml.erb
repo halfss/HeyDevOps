@@ -15,47 +15,47 @@
 
 <property>
   <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:mysql://localhost:3306/metastore</value>
-    </property>
+  <value>jdbc:mysql://hadoop-secondary:3306/metastore</value>
+</property>
 
 <property>
   <name>javax.jdo.option.ConnectionDriverName</name>
-    <value>com.mysql.jdbc.Driver</value>
-    </property>
+  <value>com.mysql.jdbc.Driver</value>
+</property>
 
 <property>
   <name>javax.jdo.option.ConnectionUserName</name>
-    <value>hiveuser</value>
-    </property>
+  <value>hiveuser</value>
+</property>
 
 <property>
   <name>javax.jdo.option.ConnectionPassword</name>
-    <value>password</value>
-    </property>
+  <value>password</value>
+</property>
 
 <property>
   <name>datanucleus.autoCreateSchema</name>
-    <value>false</value>
-    </property>
+  <value>false</value>
+</property>
 
 <property>
   <name>datanucleus.fixedDatastore</name>
-    <value>true</value>
-    </property>
+  <value>true</value>
+</property>
 
 <property>
   <name>hive.stats.autogather</name>
-    <value>false</value>
-    </property>
+  <value>false</value>
+</property>
 
 <property>
-    <name>hive.aux.jars.path</name>
-    <value>file:///usr/lib/hive/lib/hive-hbase-handler-0.7.1-cdh3u4.jar,file:///usr/lib/hbase/hbase-0.90.6-cdh3u4.jar,file:///usr/lib/zookeeper/zookeeper-3.3.5-cdh3u4.jar</value> 
-    </property>
+  <name>hive.aux.jars.path</name>
+  <value>file:///usr/lib/hive/lib/hive-hbase-handler-0.7.1-cdh3u4.jar,file:///usr/lib/hbase/hbase-0.90.6-cdh3u4.jar,file:///usr/lib/zookeeper/zookeeper-3.3.5-cdh3u4.jar</value> 
+</property>
 
 <property>
   <name>hbase.zookeeper.quorum</name>
-    <value>hadoop-master,hadoop-secondary,hadoop-node-1</value>
-    </property>
+  <value>hadoop-master,hadoop-secondary,hadoop-node-1</value>
+</property>
 
 </configuration>
