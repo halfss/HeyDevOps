@@ -5,8 +5,8 @@ class graphite::server {
     # Require the agent from agent.pp
     require graphite::agent
 
-    # Require the common:httpd from common/httpd.pp
-    require common::httpd
+    # Include the common:httpd from common/httpd.pp
+    include common::httpd
 
     # Install required RPM packages
     $package_list = [ 
@@ -68,6 +68,7 @@ class graphite::server {
         ensure  => present,
         content => template("graphite/graphite-vhost.conf.erb"),
         require => Package["graphite-web","carbon"], # Require Package
+        notify  => Service["httpd"], # Notify the service to restart when changes
     }
 
     # Update /opt/graphite/webapp/graphite/local_settings.py
