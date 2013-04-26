@@ -49,6 +49,21 @@ def parse_opts():
     # return the values of arguments
     return {'group':args.g, 'host':args.H, 'project':args.r, 'task':args.t, 'number':args.f}
 
+def fab_cmd(**kwargs):
+    project = kwargs['project']
+    host = kwargs['host']
+    number = kwargs['number']
+    task = kwargs['task']
+
+    if not number:
+        cmd_string = ("fab -f service/%s.py -H %s %s" % (project,host,task))
+        print("Executing \"%s\"" % cmd_string)
+        os.system(cmd_string)
+    else:
+        cmd_string = ("fab -f service/%s.py -H %s -P -z %s %s" % (project,host,number,task))
+        print("Executing \"%s\"" % cmd_string)
+        os.system(cmd_string)
+
 def run_task(opts):
     project = opts["project"]
     task = opts["task"]
@@ -62,11 +77,9 @@ def run_task(opts):
         else:
             number = opts["number"]
             if not number:
-                print("Executing \"fab -f service/%s.py -H %s %s \"" % (project,host,task))
-                os.system("fab -f service/%s.py -H %s %s" % (project,host,task))
+                fab_cmd(project=project,host=host,task=task)
             else:
-                print("Executing \"fab -f service/%s.py -H %s -P -z %s %s \"" % (project,host,number,task))
-                os.system("fab -f service/%s.py -H %s -P -z %s %s" % (project,host,number,task))
+                fab_cmd(project=project,host=host,number=number,task=task)
     else:
         dbopts = dbconf()
         host = dbopts["host"]
@@ -74,18 +87,19 @@ def run_task(opts):
         user = dbopts["user"]
         password = dbopts["password"]
         db = Connection(host,database,user,password)
-        sql = ('SELECT * FROM hosts WHERE `group`="%s"' % group)
+        sql = ("""SELECT * FROM hosts WHERE `group` like '%s'""" % ('%%' + group + '%%'))
         str = []
         for item in db.query(sql):
             str.append(item.public_ip)
         host = ','.join(str)
+        if not host:
+            print ("No host(s) found in group \"%s\"" % group)
+            return None
         number = opts["number"]
         if not number:
-            print("Executing \"fab -f service/%s.py -H %s %s \"" % (project,host,task))
-            os.system("fab -f service/%s.py -H %s %s " % (project,host,task))
+            fab_cmd(project=project,host=host,task=task)
         else:
-            print("Executing \"fab -f service/%s.py -H %s -P -z %s %s \"" % (project,host,number,task))
-            os.system("fab -f service/%s.py -H %s -P -z %s %s" % (project,host,number,task))
+            fab_cmd(project=project,host=host,number=number,task=task)
 
 def main():
     # check if user executes the script without any arguments
