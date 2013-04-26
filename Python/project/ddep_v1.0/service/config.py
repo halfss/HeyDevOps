@@ -26,3 +26,15 @@ def dbconf():
         return False
     else:
         return {'host':host,'database':database,'user':user,'password':password}
+
+def userconf():
+    try:
+        file = os.path.join(settings.CONFIG_HOME, 'auth.ini')
+        config.read(file)
+        user = config.get("default", "user")
+        keyfile = config.get("default", "keyfile")
+    except ConfigParser.Error, e:
+        print '{0}'.format(e)
+        return False
+    else:
+        return {'user':user, 'keyfile':keyfile}

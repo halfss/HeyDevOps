@@ -9,7 +9,7 @@ import sys
 import os
 
 from utils.torndb import Connection
-from service.config import dbconf
+from service.config import dbconf, userconf
 
 def parse_opts():
     """Help messages (-h, --help) for fabfile.py."""
@@ -52,54 +52,49 @@ def parse_opts():
 def fab_cmd(**kwargs):
     project = kwargs['project']
     host = kwargs['host']
-    number = kwargs['number']
     task = kwargs['task']
 
-    if not number:
-        cmd_string = ("fab -f service/%s.py -H %s %s" % (project,host,task))
-        print("Executing \"%s\"" % cmd_string)
-        os.system(cmd_string)
+    useropts = userconf()
+
+    if not kwargs.has_key("number"):
+        cmd_string = 'fab -u {0} -i {1} -f service/{2}.py -H {3} {4}'.format(useropts["user"],
+                useropts["keyfile"],project,host,task)
+        print 'Executing \"{0}\"'.format(cmd_string)
+        return os.system(cmd_string)
     else:
-        cmd_string = ("fab -f service/%s.py -H %s -P -z %s %s" % (project,host,number,task))
-        print("Executing \"%s\"" % cmd_string)
-        os.system(cmd_string)
+        number = kwargs["number"]
+        cmd_string = 'fab -u {0} -i {1} -f service/{2}.py -H {3} -P -z {4} {5}'.format(useropts["user"],
+                useropts["keyfile"],project,host,number,task)
+        print 'Executing \"{0}\"'.format(cmd_string)
+        return os.system(cmd_string)
+
+def run_task_from_db(opts):
+    dbopts = dbconf()
+    db = Connection(dbopts["host"], dbopts["database"], dbopts["user"], dbopts["password"])
+    sql = """SELECT * FROM hosts WHERE `group` like '{0}'""".format('%%' + opts["group"] + '%%')
+    result = []
+    for item in db.query(sql):
+        result.append(item.public_ip)
+    host = ','.join(result)
+    if not host:
+        print "No host(s) found in group \"{0}\"".format(opts["group"])
+        return
+    if not opts["number"]:
+        return fab_cmd(project=opts["project"],host=host,task=opts["task"])
+    return fab_cmd(project=opts["project"],host=host,number=opts["number"],task=opts["task"])
+
+def run_task_from_value(opts):
+    if not opts["host"]:
+        print "A group or host(s) is required."
+        return
+    if not opts["number"]:
+        return fab_cmd(project=opts["project"],host=opts["host"],task=opts["task"])
+    return fab_cmd(project=opts["project"],host=opts["host"],number=opts["number"],task=opts["task"])
 
 def run_task(opts):
-    project = opts["project"]
-    task = opts["task"]
-
-    group = opts["group"]
-    if not group:
-        host = opts["host"]
-        if not host:
-            print "A group or host(s) is required."
-            return None
-        else:
-            number = opts["number"]
-            if not number:
-                fab_cmd(project=project,host=host,task=task)
-            else:
-                fab_cmd(project=project,host=host,number=number,task=task)
-    else:
-        dbopts = dbconf()
-        host = dbopts["host"]
-        database = dbopts["database"]
-        user = dbopts["user"]
-        password = dbopts["password"]
-        db = Connection(host,database,user,password)
-        sql = ("""SELECT * FROM hosts WHERE `group` like '%s'""" % ('%%' + group + '%%'))
-        str = []
-        for item in db.query(sql):
-            str.append(item.public_ip)
-        host = ','.join(str)
-        if not host:
-            print ("No host(s) found in group \"%s\"" % group)
-            return None
-        number = opts["number"]
-        if not number:
-            fab_cmd(project=project,host=host,task=task)
-        else:
-            fab_cmd(project=project,host=host,number=number,task=task)
+    if not opts["group"]:
+        return run_task_from_value(opts)
+    return run_task_from_db(opts)
 
 def main():
     # check if user executes the script without any arguments

@@ -23,6 +23,10 @@ class role_datanode {
     include hadoop::hue
 }
 
+class role_ddepsupport {
+    include ddep::user
+}
+
 class role_zookeeperserver {
     include hadoop::zookeeperserver
 }
@@ -37,6 +41,7 @@ node 'ip-10-197-29-251.us-west-1.compute.internal' {
     include role_namenode
     include role_datanode
     include role_zookeeperserver
+    include role_ddepsupport
 }
 
 node 'ip-10-196-9-188.us-west-1.compute.internal' {
@@ -44,10 +49,16 @@ node 'ip-10-196-9-188.us-west-1.compute.internal' {
     include role_secondarynamenode
     include role_datanode
     include role_zookeeperserver
+    include role_ddepsupport
 }
 
 node 'ip-10-197-62-239.us-west-1.compute.internal' {
     $zookeeper_myid = '3'
     include role_datanode
     include role_zookeeperserver
+    include role_ddepsupport
+}
+
+node 'ip-10-197-10-4.us-west-1.compute.internal' {
+    include role_ddepsupport
 }

@@ -8,7 +8,7 @@
 import MySQLdb
 
 class MyInventory(object):
-    HOST = '192.168.92.128'
+    HOST = '10.196.9.188'
     DB = 'inventory'
     USER = 'inventory'
     PWD = 'inventory'
@@ -84,17 +84,23 @@ if __name__=='__main__':
                 "cn1","prod","adserver","10.197.51.26","54.241.41.87","symbio2"),
             ("ip-10-196-13-42.us-west-1.compute.internal","ec2-184-169-192-187.us-west-1.compute.amazonaws.com",
                 "va1","qa","apiserver","10.196.13.42","184.169.192.187","symbio3"),
-            ("ip-10-197-55-99.us-west-1.compute.internal","ec2-54-241-203-243.us-west-1.compute.amazonaws.com",
-                "cn1","prod","apiserver","10.197.55.99","54.241.203.243","symbio4"),
+            ("ip-10-197-10-4.us-west-1.compute.internal","ec2-204-236-182-78.us-west-1.compute.amazonaws.com",
+                "cn1","prod","apiserver","10.197.10.4","204.236.182.78","symbio4"),
+            ("ip-10-197-29-251.us-west-1.compute.internal","ec2-54-241-68-127.us-west-1.compute.amazonaws.com",
+                "cn2","test","puppetmaster.hadoopmaster.hadoopnode","10.197.29.251","54.241.68.127","symbio5"),
+            ("ip-10-196-9-188.us-west-1.compute.internal","ec2-54-241-217-87.us-west-1.compute.amazonaws.com",
+                "cn2","test","hadoopnode","10.196.9.188","54.241.217.87","symbio6"),
+            ("ip-10-197-62-239.us-west-1.compute.internal","ec2-54-241-226-63.us-west-1.compute.amazonaws.com",
+                "cn2","test","hadoopnode","10.197.62.239","54.241.226.63","symbio7"),
             ("centos","heylinux.com",
-                "cn1","dev","blogsite","none","204.74.215.57","myblog")
+                "cn3","priv","blog","none","204.74.215.57","blog")
             ]
     db.execute(sql,param)
 
     # Update
     sql = """UPDATE hosts SET `group`=%s WHERE hostname=%s;"""
     param = [
-            ("adserver","ip-10-197-55-99.us-west-1.compute.internal")
+            ("adserver","ip-10-197-10-4.us-west-1.compute.internal")
             ]
     db.execute(sql,param)
 

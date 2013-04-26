@@ -30,7 +30,7 @@ class hadoop::gangliaserver {
         path    => "/etc/httpd/conf.d/ganglia.conf",
         mode    => "0644", owner => "ganglia", group => "ganglia",
         ensure  => present,
-        content => template("hadoop/httpd-ganglia.conf.erb"),
+        content => template("hadoop/httpd_ganglia.conf.erb"),
         require => Package["ganglia-web"], # Require Package
         notify  => Service["httpd"], # Notify the service to restart when changes
     }
