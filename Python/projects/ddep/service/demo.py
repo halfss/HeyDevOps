@@ -11,7 +11,7 @@ from service import global_settings
 
 settings = global_settings
 
-class FabricSupport:
+class FabricSupport(object):
     def __init__(self):
         pass
 
