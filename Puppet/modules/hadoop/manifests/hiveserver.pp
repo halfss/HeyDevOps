@@ -25,13 +25,6 @@ class hadoop::hiveserver {
         require => Package["hadoop-hive"], # Require Package
     }
     
-    # Copy the hive_initialization_steps.txt
-    file { "hive_initialization_steps.txt":
-        path   => "${hadoop::params::moduledir}/hive_initialization_steps.txt",
-        mode   => "0644", owner => "root", group => "root",
-        source => "puppet:///modules/hadoop/hive_initialization_steps.txt",
-    }
-
     # Copy the hive_mysqlserver_initialization.sql
     file { "hive_mysqlserver_initialization.sql":
         path   => "${hadoop::params::moduledir}/hive_mysqlserver_initialization.sql",
@@ -50,5 +43,20 @@ class hadoop::hiveserver {
         enable => "true",
         ensure => "running",
         require => Package["hadoop-hive-server"], # Require Package
+    }
+
+    # Copy the hive_initialization.sh
+    file { "hive_initialization.sh":
+        path   => "${hadoop::params::moduledir}/hive_initialization.sh",
+        mode   => "0755", owner => "root", group => "root",
+        source => "puppet:///modules/hadoop/hive_initialization.sh",
+        require => Service["hadoop-hive-metastore"], # Require Service
+    }
+
+    # Execute the hive_initialization.sh
+    exec { "hive_initialization":
+        command => "/bin/sh ${hadoop::params::moduledir}/hive_initialization.sh",
+        unless => "sudo -u hdfs hadoop fs -test -e /user/hive",
+        require => File["hive_initialization.sh"], # Reauire File
     }
 }

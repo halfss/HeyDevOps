@@ -12,13 +12,6 @@ class hadoop::hbasemaster {
                     ]
     package { $package_list: ensure => "installed" }
     
-    # Copy the hbasemaster_initialization_steps.txt
-    file { "hbasemaster_initialization_steps.txt":
-        path   => "${hadoop::params::moduledir}/hbasemaster_initialization_steps.txt",
-        mode   => "0644", owner => "root", group => "root",
-        source => "puppet:///modules/hadoop/hbasemaster_initialization_steps.txt",
-    }
-
     # Ensure services start on boot and running
     service { "hadoop-hbase-master":
         enable => "true",
@@ -30,5 +23,20 @@ class hadoop::hbasemaster {
         enable => "true",
         ensure => "running",
         require => Package["hadoop-hbase-thrift"], # Require Package
+    }
+
+    # Copy the hbasemaster_initialization.sh
+    file { "hbasemaster_initialization.sh":
+        path   => "${hadoop::params::moduledir}/hbasemaster_initialization.sh",
+        mode   => "0755", owner => "root", group => "root",
+        source => "puppet:///modules/hadoop/hbasemaster_initialization.sh",
+        require => Service["hadoop-hbase-master"], # Require Service
+    }
+
+    # Execute the hbasemaster_initialization.sh
+    exec { "hbasemaster_initialization":
+        command => "/bin/sh ${hadoop::params::moduledir}/hbasemaster_initialization.sh",
+        unless => "sudo -u hdfs hadoop fs -test -e /hbase",
+        require => File["hbasemaster_initialization.sh"], # Reauire File
     }
 }

@@ -80,10 +80,19 @@ class graphite::server {
         require => Package["graphite-web","carbon"], # Require Package
     }
 
-    # Copy the graphite_server_initialization_steps.txt
-    file { "graphite_server_initialization_steps.txt":
-        path   => "${graphite::params::moduledir}/graphite_server_initialization_steps.txt",
-        mode   => "0644", owner => "apache", group => "apache",
-        source => "puppet:///modules/graphite/graphite_server_initialization_steps.txt",
+    # Copy the graphite_server_initialization.sh
+    file { "graphite_server_initialization.sh":
+        path   => "${graphite::params::moduledir}/graphite_server_initialization.sh",
+        mode   => "0755", owner => "root", group => "root",
+        source => "puppet:///modules/graphite/graphite_server_initialization.sh",
+        require => Service["httpd"], # Require Service
     }
+
+    # Execute the graphite_server_initialization.sh
+    exec { "graphite_server_initialization":
+        command => "/bin/sh ${graphite::params::moduledir}/graphite_server_initialization.sh",
+        creates => "/opt/graphite/storage/graphite.db",
+        require => File["graphite_server_initialization.sh"], # Reauire File
+    }
+
 }

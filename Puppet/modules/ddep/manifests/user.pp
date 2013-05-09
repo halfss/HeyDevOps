@@ -30,7 +30,7 @@ class ddep::user {
     # Update /etc/sudoers.d/ddep
     file { "sudoers_ddep":
         path    => "/etc/sudoers.d/ddep",
-        mode    => "0660", owner => "root", group => "root",
+        mode    => "0440", owner => "root", group => "root",
         ensure  => present,
         content => template("ddep/sudoers_ddep.erb"),
         require => User["deploy"], # Require User

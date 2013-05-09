@@ -45,13 +45,6 @@ class hadoop::hueserver {
         require => File["hue.ini"], # Require File
     }
 
-    # Copy the hueserver_initialization_steps.txt
-    file { "hueserver_initialization_steps.txt":
-        path   => "${hadoop::params::moduledir}/hueserver_initialization_steps.txt",
-        mode   => "0644", owner => "root", group => "root",
-        source => "puppet:///modules/hadoop/hueserver_initialization_steps.txt",
-    }
-
     # Ensure the setuid permissions
     file { "setuid":
         path   => "/usr/share/hue/apps/shell/src/shell/build/setuid",
