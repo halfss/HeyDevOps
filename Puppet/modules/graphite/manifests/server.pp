@@ -31,7 +31,7 @@ class graphite::server {
     package { $pip_list: 
         ensure   => "installed", 
         provider => "pip", 
-        require  => Package["python-setuptools","python-pip","python-devel"], # Require Package
+        require  => Package["python-setuptools","python-pip","python-devel"], # Require Package 
     }
 
     # Update /opt/graphite/conf/carbon.conf
@@ -94,5 +94,4 @@ class graphite::server {
         creates => "/opt/graphite/storage/graphite.db",
         require => File["graphite_server_initialization.sh"], # Reauire File
     }
-
 }

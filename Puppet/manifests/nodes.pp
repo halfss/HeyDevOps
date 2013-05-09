@@ -11,6 +11,7 @@ class role_secondarynamenode {
     include hadoop::hiveserver
     include hadoop::gangliaserver
     include graphite::server
+    include statsd::service
 }
 
 class role_datanode {
