@@ -2,8 +2,8 @@
 ------------------------------------------------------
 HDFS + Hbase + Zookeeper + Hive + Ganglia + HUE
 
-2. Puppet solution for Graphite
+2. Puppet solution for Graphite and Statsd
 ------------------------------------------------------
-Graphite agent + Graphite server
+Graphite agent + Graphite server + Statsd
 
 
