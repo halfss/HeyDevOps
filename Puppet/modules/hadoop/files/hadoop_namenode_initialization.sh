@@ -26,7 +26,7 @@ function format_namenode()
         exit 0
     else 
         echo "Format the HDFS on Namenode"
-        sudo -u hdfs hadoop namenode -Format
+        sudo -u hdfs hadoop namenode -format
         
         echo "Start the namenode service"
         sudo /etc/init.d/hadoop-0.20-namenode start 
