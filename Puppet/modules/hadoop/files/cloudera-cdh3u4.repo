@@ -1,8 +1,0 @@
-# File Managed by Puppet
-
-[cloudera-cdh3u4]
-# Packages for Cloudera's Distribution for Hadoop, Version 3 Update 4, on RedHat or CentOS 6
-name=Cloudera's Distribution for Hadoop, Version 3
-mirrorlist=http://archive.cloudera.com/redhat/6/x86_64/cdh/3u4/mirrors
-gpgkey = http://archive.cloudera.com/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera    
-gpgcheck = 1

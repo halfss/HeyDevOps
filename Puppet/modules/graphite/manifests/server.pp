@@ -94,4 +94,5 @@ class graphite::server {
         creates => "/opt/graphite/storage/graphite.db",
         require => File["graphite_server_initialization.sh"], # Reauire File
     }
+
 }

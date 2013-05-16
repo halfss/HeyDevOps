@@ -28,10 +28,10 @@ class hadoop::basepackages {
     }
 
     # Create Cloudera yum repo
-    file { "cloudera-cdh3u4.repo":
-        path   => "/etc/yum.repos.d/cloudera-cdh3u4.repo",
+    file { "cloudera-cdh3u5.repo":
+        path   => "/etc/yum.repos.d/cloudera-cdh3u5.repo",
         mode   => "0644", owner => "root", group => "root",
-        source => "puppet:///modules/hadoop/cloudera-cdh3u4.repo",
+        source => "puppet:///modules/hadoop/cloudera-cdh3u5.repo",
     }
 
     # Update /etc/hosts

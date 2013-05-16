@@ -1,4 +1,4 @@
-1. Puppet solution for Hadoop - CDH3 Update4
+1. Puppet solution for Hadoop - CDH3 Update5
 ------------------------------------------------------
 HDFS + Hbase + Zookeeper + Hive + Ganglia + HUE
 
