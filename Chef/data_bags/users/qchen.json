@@ -1,9 +1,0 @@
-{
-    "id"       : "qchen",
-    "gid": "admin",
-    "comment"  : "qchen",
-    "home"     : "/home/qchen",
-    "create_user_group":"false",
-    "ssh_keygen": "false",
-    "ssh_keys" : "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC11adnsZk8DLurNfUhypl+1cjJQuys2cY71jC0+qMrAyOcHUIbd/nOszeS2bjDTL0dGyFFnyX1lfn+AhDZPrw2ZU5aGDQGcNcZcZGGBfwPgKQSTroGrdm6vIDnZgIoWosrEpaljkgEAJYlcEPjZWpBz/LUSQ9KaYzsXbMG08eVzRKff09j/+UdtEGBFKYNaVzr6/Lqtg/8LNKqvniveHofdGkYqk6Et97+ORN1km/p/iYKKSqNv1MrA0gannpwxf+i3OGvCc30wLIUxm2N9YbnL6KvseM3lNOtvybFivAQZU0G2PL5szDDkTfE357XD0kiM13bfFLY7XNe/txMeT3J qchen@ubuntu"
-}

@@ -13,7 +13,7 @@ override_attributes(
       }
     },
 
-    "users" => [ "baina","kunli","dongguo"],
+    "users" => [ "dongguo"],
     "openssh" => {
         "PasswordAuthentication" => "no"
     },

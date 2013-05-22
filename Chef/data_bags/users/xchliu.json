@@ -1,9 +1,0 @@
-{
-    "id"       : "xchliu",
-    "gid": "admin",
-    "comment"  : "xchliu",
-    "home"     : "/home/xchliu",
-    "create_user_group":"false",
-    "ssh_keygen": "false",
-    "ssh_keys" : "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCuZNy7df1YzCPtZtpIQlIYtyQ/e2ejWGTXl1/rXq0nDIByUdTUfuDw3ul23Fjofoy8XPXlrHzfN2McnYnA7BoVIi9ClygV4suaj8m2AHUYzntXpjUkgRWr+UdeKGBiEzfRBS7ePm36inOVg7LF8fOqI26112JUCT+L9/6WOI8zljaSyGDzFXkBF6WhmjT5HpCstt5AqDIy/m4AckrF4EIzr90MQ3pt3V1GGcXTQQAyg7zudDCd8/hmSGBHC+mYsdIlHxC2V0VuYk2GqCJuxLDcFANVqQ99TCRmw9ETlKhxcN7LDSreSHS+8CqY8x9umHAED7X7Gxgjaqe/0ceC9zd xchliu@bainainfo.com"
-}
