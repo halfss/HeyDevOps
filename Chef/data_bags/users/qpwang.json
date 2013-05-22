@@ -1,0 +1,9 @@
+{
+    "id"       : "qpwang",
+    "gid": "admin",
+    "comment"  : "qpwang",
+    "home"     : "/home/qpwang",
+    "create_user_group":"false",
+    "ssh_keygen": "false",
+    "ssh_keys" : "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/ZIadWqQ6FmiDI0TL/tNehZejBQB14ClOmO7fBc5xIsNpVIXFUMIICv4T1mxXZe1igXpQJ2fEYM3o8SxlekU6BX7Yq2WIfj34Y1yYQJsUNwWa0DAPcGwQsLlxmSxs8cU51Ph0b5Ul8zDmaVhDp+WgJF2lOsGS8QmxgXODjgOUx71picMBhkD8g5NXAC3pjcYImOAlxUqI/P1ZM7WpdQqfcPfk3fJ8NCIBgdXOADCLeyqXE490spSD9ecMI2HHs2C4l/ivu79FHlrOgVjNnGefKaAoi2M3HMAri6AV3k4Ogr0aF/blnefDUxbNTGX8G/WxKuzhYslT4N8gdcm/16KT qpwang@qpwang-ubuntu"
+}

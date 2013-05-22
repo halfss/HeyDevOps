@@ -1,0 +1,9 @@
+{
+    "id"       : "kunli",
+    "comment"  : "Kun Li",
+    "gid"      : "admin",
+    "home"     : "/home/kunli",
+    "create_user_group":"false",
+    "ssh_keygen": "false",
+    "ssh_keys" : "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaijtjhCNraZtFaug5QFlEOz2axR2OuXWSwjeCNrr57HAx8foA5ivfCLw0mJ6kD9fk9p/mi0O1zLBxVqQIo0/9HNwM4FxmyclKLYyaJq6626sMG8jrNEwsdbD7zXzdxjxxCxfXNWrOYfX79J5pED2zq+KYKQrormPqYSWC5fgt9VC88HNYP7AV2vVXNvfezPRdeGqFmnfMZ8kGEQFq+xeeMGUEFmo2Fiy4YOEdN5HLUqD52Yy2mlPckbUNopxG8gl8zslMdFGB33X/Zf0YZ7Fcy/HwY02OV19ubPjQTcpMsQ8o9oEfp0wseOJimWHohqrtR3+awLlEO90WwkSkBz97 kwinter@ubuntu"
+}

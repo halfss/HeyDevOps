@@ -1,0 +1,9 @@
+{
+    "id"       : "wywu",
+    "gid": "admin",
+    "comment"  : "wywu",
+    "home"     : "/home/wywu",
+    "create_user_group":"false",
+    "ssh_keygen": "false",
+    "ssh_keys" : "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFjMG6dTFwVxOkKC2dWsvujA/+ex7uUNSC9lOxOEgTreuFqn+Q1HV5EIsmubjng3n0zUVP66epa1MopQDVjBC/7T85L5tsO9yavQgG8kobP2irI5Qmsn48KzY38Gt5Z03Rf3w/6sHSxNOr8nUEG6ZfNoLcguBgD6W9vhA5UPXBf4d0IpC2fSgVokZSVPNRkGZREcEHMaW/k9Z4hcnxLLIILOh+HccUX68dleeKUUG+fmFUNgstDILoy/bC7VwR0IrBh59duvG5tRjva2vToZTpDmgJTt156hE9LD+lBmFJaONxQ/8goy04GGAZgq0wZr/gc5i/Yo/r/8bYK1/SX1bX wuxianglong@wuxianglong"
+}
