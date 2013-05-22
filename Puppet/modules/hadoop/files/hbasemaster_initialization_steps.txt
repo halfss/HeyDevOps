@@ -1,9 +1,0 @@
-"File Managed by Puppet"
-
-"--------------------------------------------"
-"The initialization steps for Hbase Master"
-"--------------------------------------------"
-
-"Step1. Create the directories on HDFS"
-sudo -u hdfs hadoop fs -mkdir /hbase
-sudo -u hdfs hadoop fs -chown hbase /hbase

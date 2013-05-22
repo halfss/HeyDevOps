@@ -15,7 +15,7 @@
 
 <property>
   <name>javax.jdo.option.ConnectionURL</name>
-  <value>jdbc:mysql://hadoop-secondary:3306/metastore</value>
+  <value>jdbc:mysql://ip-10-196-9-188.us-west-1.compute.internal:3306/metastore</value>
 </property>
 
 <property>
@@ -55,7 +55,23 @@
 
 <property>
   <name>hbase.zookeeper.quorum</name>
-  <value>hadoop-master,hadoop-secondary,hadoop-node-1</value>
+  <value>ip-10-197-29-251.us-west-1.compute.internal,ip-10-196-9-188.us-west-1.compute.internal,ip-10-197-62-239.us-west-1.compute.internal</value>
+</property>
+
+<!-- Hive security configs -->
+<property>
+  <name>hive.metastore.sasl.enabled</name>
+  <value>true</value>
+</property>
+
+<property>
+  <name>hive.metastore.kerberos.keytab.file</name>
+  <value>/etc/hive/conf/hive.keytab</value>
+</property>
+
+<property>
+  <name>hive.metastore.kerberos.principal</name>
+  <value>hive/_HOST@US-WEST-1.COMPUTE.INTERNAL</value>
 </property>
 
 </configuration>
