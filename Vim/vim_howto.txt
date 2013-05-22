@@ -1,4 +1,4 @@
-sudo yum install vim
+sudo yum install vim ctags
 
 cp .vimrc ~/
 cp -r .vim ~/
