@@ -1,1 +1,0 @@
-sudo pip-python install fabric paramiko
