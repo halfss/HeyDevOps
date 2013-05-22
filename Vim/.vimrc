@@ -39,7 +39,8 @@ set vb t_vb=                 " 关闭提示音
 set cursorline               " 突出显示当前行
 set hidden                   " 允许在有未保存的修改时切换缓冲区
 
-set list                     " 显示Tab符，使用高亮竖线代替
+"显示Tab符,使用高亮竖线代替
+set list
 set listchars=tab:\|\ ,
 set expandtab
 
@@ -69,17 +70,29 @@ language messages zh_CN.utf-8
 ""插件配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Taglist
-let Tlist_Show_One_File=1                    " 只显示当前文件的tags
-let Tlist_Exit_OnlyWindow=1                  " 如果Taglist窗口是最后一个窗口则退出Vim
-let Tlist_Use_Right_Window=1                 " 在右侧窗口中显示
-let Tlist_File_Fold_Auto_Close=1             " 自动折叠
+let Tlist_Use_Right_Window = 1                 " 在右侧窗口中显示
+let Tlist_File_Fold_Auto_Close = 1             " 自动折叠
+let Tlist_Show_One_File = 1                    " 只显示当前文件的tags
+let Tlist_Exit_OnlyWindow = 1                  " 如果Taglist窗口是最后一个窗口则退出Vim
+
+"通过快捷键<F12>打开Tlist
 nnoremap <silent> <F12> :Tlist<CR>
-nnoremap <silent> <F11> :TlistSync<CR>
-nnoremap <silent> <F10> <C-W>w
+
+"通过快捷键<F11>打开NERDTree
+nnoremap <silent> <F11> :NERDTreeToggle<CR>
+
+"通过快捷键<F9>切换窗口
+nnoremap <silent> <F9> <C-W>w
 
 "Python语法结构自动补全 [pydiction]
 filetype plugin on
 let g:pydiction_location = '~/.vim/data_sources/pydiction/complete-dict'
+
+"Minibufexpl 多文件编辑
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1   
+let g:miniBufExplMapCTabSwitchBufs = 1   
+let g:miniBufExplModSelTarget = 1 
 
 
 ""引号,括号自动匹配 
@@ -113,7 +126,7 @@ endf
 ""自定义函数
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "加载语法模板和作者,时间信息 [非插入模式]
-function Mytitle()
+function MyTitle()
     call append(0, "#!/usr/bin/env python")
     call append(1, "#-*- coding:utf-8 -*-")
     call append(2, "")
@@ -122,7 +135,7 @@ function Mytitle()
     call append(5, "# Author: Dong Guo")
 endf
 
-function Mymain() 
+function MyMain() 
     call append(line("."),   "def main():")
     call append(line(".")+1, "")
     call append(line(".")+2, "if __name__=='__main__':")
@@ -130,6 +143,6 @@ function Mymain()
 endf
 
 "映射到快捷键
-map <F2> <Esc>:call Mytitle()<CR><Esc>
-map <F3> <Esc>:call Mymain()<CR><Esc>
+map <F2> <Esc>:call MyTitle()<CR><Esc>
+map <F3> <Esc>:call MyMain()<CR><Esc>
 
