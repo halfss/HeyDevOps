@@ -5,6 +5,6 @@ HeyDevOps
 Subdirectories:<br />
 ------------------
 Bash, Python; Vim;<br />
-Chef, Puppet; Zabbix, Nagios; CloudStack, OpenStack;<br />
+Chef, Puppet, Salt; Zabbix, Nagios; CloudStack, OpenStack;<br />
 Hadoop<br />
 ...<br />
