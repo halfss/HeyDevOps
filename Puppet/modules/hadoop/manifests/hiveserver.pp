@@ -59,4 +59,11 @@ class hadoop::hiveserver {
         unless => "sudo -u hdfs hadoop fs -test -e /user/hive",
         require => File["hive_initialization.sh"], # Reauire File
     }
+
+    # Copy the Hive Kerberos Keytab
+    file { "hive.keytab":           
+        path    => "/etc/hive/conf/hive.keytab",   
+        mode    => "0400", owner => "hive", group => "hive",                                                                          
+        source  => "puppet:///modules/hadoop/kerberos/hive.keytab",
+    }
 }

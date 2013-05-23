@@ -3,6 +3,7 @@ class role_namenode {
     include hadoop::namenode
     include hadoop::hbasemaster
     include hadoop::hueserver
+    include hadoop::kerberosserver
 }
 
 class role_secondarynamenode {
@@ -22,6 +23,7 @@ class role_datanode {
     include hadoop::hive
     include hadoop::ganglia 
     include hadoop::hue
+    include hadoop::kerberos
 }
 
 class role_ddepsupport {

@@ -31,7 +31,7 @@ class hadoop::ganglia {
         mode    => "0644", owner => "hdfs", group => "hadoop",
         ensure  => present,
         content => template("hadoop/hadoop-metrics.properties.erb"),
-        require => Package["hadoop-0.20"], # require Package
+        require => Package["hadoop-0.20"], # Require Package
    }
 
    # Update /etc/hbase/conf/hadoop-metrics.properties 
@@ -40,7 +40,7 @@ class hadoop::ganglia {
         mode    => "0644", owner => "hbase", group => "hbase",
         ensure  => present,
         content => template("hadoop/hbase_hadoop-metrics.properties.erb"),
-        require => Package["hadoop-hbase"], # require Package
+        require => Package["hadoop-hbase"], # Require Package
    }
 
     # Ensure service starts on boot and running

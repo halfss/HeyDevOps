@@ -13,7 +13,7 @@
 <!-- file system properties -->
 <property>
   <name>fs.default.name</name>
-  <value>hdfs://hadoop-master:8020</value>
+  <value>hdfs://ip-10-197-29-251.us-west-1.compute.internal:8020</value>
 </property>
 
 <property>
@@ -33,6 +33,20 @@
 <property>
   <name>hadoop.proxyuser.httpfs.groups</name>
   <value>*</value>
+</property>
+
+<!-- Kerberos setting -->
+<property>
+  <name>hadoop.security.authentication</name>
+  <value>kerberos</value>
+</property>
+<property>
+  <name>hadoop.security.authorization</name> 
+  <value>true</value>
+</property>
+<property>
+  <name>hadoop.security.use-weak-http-crypto</name>
+  <value>false</value>
 </property>
 
 </configuration>
