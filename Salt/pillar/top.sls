@@ -1,3 +1,7 @@
 base:
   '*':
-    - edit.vim
+    - _salt.params
+    - schedules.params
+    - moosefs.params
+    - users.lists
+
